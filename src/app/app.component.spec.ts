@@ -1,11 +1,18 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { FilterPipe } from './pipes/filter.pipe';
+
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [
+        HttpClientTestingModule
+      ],
       declarations: [
-        AppComponent
+        AppComponent,
+        FilterPipe
       ],
     }).compileComponents();
   });
@@ -15,17 +22,11 @@ describe('AppComponent', () => {
     const app = fixture.componentInstance;
     expect(app).toBeTruthy();
   });
-
-  it(`should have as title 'the-lord-of-the-rings-fe'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('the-lord-of-the-rings-fe');
-  });
-
+  
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('the-lord-of-the-rings-fe app is running!');
+    expect(compiled.querySelector('.container h1')?.textContent).toContain('Lord of the rings');
   });
 });
